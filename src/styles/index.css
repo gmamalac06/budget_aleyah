@@ -48,6 +48,7 @@ h1, h2, h3 { font-family: "Fraunces Variable", Fraunces, Georgia, serif; font-va
 .companion-card::after { content:'✦'; position:absolute; right:18px; top:12px; color:var(--accent); opacity:.25; font-size:2.4rem; }
 .wallet-mascot { display:grid; place-items:center; flex:0 0 auto; }
 .wallet-mascot svg { width:100%; height:100%; overflow:visible; }
+.companion-mascot { width:142px; height:142px; }
 .wallet-float { transform-origin:center; animation:float-wallet 3.2s ease-in-out infinite; }
 .wallet-mascot--excited .wallet-float,.wallet-mascot--celebrating .wallet-float { animation:bounce-wallet .75s ease-in-out infinite; }
 .wallet-mascot--energized .wallet-float { animation:bounce-wallet .6s ease-in-out infinite; }
@@ -177,10 +178,10 @@ svg { flex: 0 0 auto; }
 @keyframes companion-pop { from{opacity:0;transform:translate(-50%,18px) scale(.96)} to{opacity:1;transform:translate(-50%,0) scale(1)} }
 
 @media (max-width:720px) {
-  .page-container{width:min(100% - 24px,1040px);padding-top:calc(21px + env(safe-area-inset-top))}.companion-card{grid-template-columns:115px 1fr;min-height:133px}.speech-bubble{margin:14px 14px 14px 0;padding:16px}.balance-card{padding:21px}.category-grid{grid-template-columns:repeat(2,1fr)}.page-header{align-items:center}.theme-grid{grid-template-columns:repeat(2,1fr)}.profile-fields{grid-template-columns:1fr}.goals-grid{grid-template-columns:1fr}
+  .page-container{width:min(100% - 24px,1040px);padding-top:calc(21px + env(safe-area-inset-top))}.companion-card{grid-template-columns:115px 1fr;min-height:133px}.companion-mascot{width:115px;height:115px}.speech-bubble{margin:14px 14px 14px 0;padding:16px}.balance-card{padding:21px}.category-grid{grid-template-columns:repeat(2,1fr)}.page-header{align-items:center}.theme-grid{grid-template-columns:repeat(2,1fr)}.profile-fields{grid-template-columns:1fr}.goals-grid{grid-template-columns:1fr}
 }
 @media (max-width:480px) {
-  .companion-card{grid-template-columns:94px 1fr}.speech-bubble{padding:14px}.speech-bubble .eyebrow{font-size:.6rem}.balance-heading h2{font-size:2.2rem}.balance-chip{font-size:.68rem}.balance-stats{gap:8px}.balance-stats strong{font-size:.78rem}.quick-actions{gap:4px}.action-icon{width:44px;height:44px}.transaction-item{grid-template-columns:auto minmax(0,1fr) auto;gap:9px}.transaction-item .delete-button{grid-column:3}.transaction-amount{font-size:.76rem}.page-header .primary-button{padding:9px 11px}.profile-editor{align-items:flex-start;flex-direction:column}.profile-fields{width:100%}.form-row{grid-template-columns:1fr}.modal-backdrop{padding:8px}.modal{padding:20px;border-radius:25px}.goal-hero{padding:8px 14px}.kind-selector button{font-size:.62rem}
+  .companion-card{grid-template-columns:94px 1fr}.companion-mascot{width:94px;height:94px}.speech-bubble{padding:14px}.speech-bubble .eyebrow{font-size:.6rem}.balance-heading h2{font-size:2.2rem}.balance-chip{font-size:.68rem}.balance-stats{gap:8px}.balance-stats strong{font-size:.78rem}.quick-actions{gap:4px}.action-icon{width:44px;height:44px}.transaction-item{grid-template-columns:auto minmax(0,1fr) auto;gap:9px}.transaction-item .delete-button{grid-column:3}.transaction-amount{font-size:.76rem}.page-header .primary-button{padding:9px 11px}.profile-editor{align-items:flex-start;flex-direction:column}.profile-fields{width:100%}.form-row{grid-template-columns:1fr}.modal-backdrop{padding:8px}.modal{padding:20px;border-radius:25px}.goal-hero{padding:8px 14px}.kind-selector button{font-size:.62rem}
 }
 @media (max-width:480px) { .companion-overlay{grid-template-columns:65px 1fr auto;padding-left:2px}.companion-overlay .wallet-mascot{width:65px!important;height:65px!important}.companion-overlay p{font-size:.78rem} }
 @media (max-width:860px) {

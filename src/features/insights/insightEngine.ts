@@ -74,7 +74,7 @@ export function generateActionReaction(data: AppData, action: CompanionAction, n
   return { id: action.id, message, mood, reason: 'action' };
 }
 
-export function generateInsight(data: AppData, now = new Date()): CompanionInsight {
+export function generateInsight(data: AppData, now = new Date(), sessionStart?: number): CompanionInsight {
   const snapshot = calculateSnapshot(data, now);
   const latest = [...data.transactions].sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0];
   const completedGoal = data.goals.find((goal) => goal.targetAmount > 0 && goal.currentAmount >= goal.targetAmount);
@@ -92,7 +92,7 @@ export function generateInsight(data: AppData, now = new Date()): CompanionInsig
     [`Reset tayo without judgment, ${who}.`, 'Small corrections count—kaya pa.', 'Pause, plan, then move forward.'],
   ], random, data.companion.recentMessages) };
   if (snapshot.budgetUsed >= .8) return { id: 'budget-near', mood: 'worried', reason: 'budget', message: `Heads up, ${who}: ${Math.round(snapshot.budgetUsed * 100)}% na ng monthly budget ang nagamit. Gentle spending mode muna?` };
-  if (latest && now.getTime() - new Date(latest.createdAt).getTime() < 5 * 60_000) return insightForTransaction(latest, data, random);
+  if (latest && now.getTime() - new Date(latest.createdAt).getTime() < 5 * 60_000 && (!sessionStart || new Date(latest.createdAt).getTime() >= sessionStart)) return insightForTransaction(latest, data, random);
 
   const generated = generateNotificationMessage(data, now, data.companion.environment, now.getHours());
   return { id: `ambient-${now.getHours()}-${now.getDate()}`, mood: generated.mood, reason: 'greeting', message: generated.body };

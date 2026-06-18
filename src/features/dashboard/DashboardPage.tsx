@@ -1,4 +1,4 @@
-import { useMemo, useState, type FormEvent } from 'react';
+import { useMemo, useRef, useState, type FormEvent } from 'react';
 import { useAppData } from '../../app/AppDataProvider';
 import type { AppRoute } from '../../app/routes';
 import { Avatar } from '../../components/Avatar';
@@ -19,8 +19,9 @@ export function DashboardPage({ onNavigate }: { onNavigate(route: AppRoute): voi
   const { data, saveCategory } = useAppData();
   const [adding, setAdding] = useState<TransactionKind | null>(null);
   const [editingCategory, setEditingCategory] = useState<BudgetCategory | null>(null);
+  const sessionStart = useRef(Date.now());
   const snapshot = useMemo(() => calculateSnapshot(data), [data]);
-  const insight = useMemo(() => generateInsight(data), [data]);
+  const insight = useMemo(() => generateInsight(data, new Date(), sessionStart.current), [data]);
   const firstName = data.profile.name.trim().split(' ')[0] || 'friend';
 
   return <>
@@ -30,12 +31,12 @@ export function DashboardPage({ onNavigate }: { onNavigate(route: AppRoute): voi
     </header>
     <CompanionCard insight={insight} />
     <section className="balance-card">
-      <div className="balance-heading"><div><span>Monthly budget remaining</span><h2>{formatMoney(snapshot.available, data.profile.currency)}</h2></div><span className="balance-chip"><BulsaIcon name="sparkle" size={15} /> {Math.round(Math.max(0, 1 - snapshot.budgetUsed) * 100)}% left</span></div>
+      <div className="balance-heading"><div><span>Wallet balance</span><h2>{formatMoney(snapshot.balance, data.profile.currency)}</h2></div><span className="balance-chip"><BulsaIcon name="sparkle" size={15} /> {Math.round(Math.max(0, 1 - snapshot.budgetUsed) * 100)}% left</span></div>
       <ProgressBar value={snapshot.budgetUsed} label="Monthly budget used" />
       <div className="balance-stats">
         <div><span><BulsaIcon name="income" size={16} /> Income</span><strong>{formatMoney(snapshot.income, data.profile.currency)}</strong></div>
         <div><span><BulsaIcon name="expense" size={16} /> Spent</span><strong>{formatMoney(snapshot.expenses, data.profile.currency)}</strong></div>
-        <div><span><BulsaIcon name="wallet" size={16} /> Saved + kept</span><strong>{formatMoney(snapshot.keep + snapshot.savings, data.profile.currency)}</strong></div>
+        <div><span><BulsaIcon name="wallet" size={16} /> Monthly budget remaining</span><strong>{formatMoney(snapshot.available, data.profile.currency)}</strong></div>
       </div>
     </section>
     <section className="quick-actions" aria-label="Quick actions">
