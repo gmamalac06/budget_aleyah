@@ -16,8 +16,9 @@ const expressions: Record<WalletMood, { eyes: string; mouth: string; brow: strin
 
 export function WalletMascot({ mood, size = 150, className = '' }: { mood: WalletMood; size?: number; className?: string }) {
   const face = expressions[mood];
+  const isCompanion = className.includes('companion-mascot');
   return (
-    <div className={`wallet-mascot wallet-mascot--${mood} ${className}`} style={{ width: size, height: size }} role="img" aria-label={`Wallet companion feeling ${mood}`}>
+    <div className={`wallet-mascot wallet-mascot--${mood} ${className}`} style={isCompanion ? undefined : { width: size, height: size }} role="img" aria-label={`Wallet companion feeling ${mood}`}>
       <svg viewBox="0 0 180 180" aria-hidden="true">
         <defs>
           <linearGradient id="walletBody" x1="0" y1="0" x2="1" y2="1">
