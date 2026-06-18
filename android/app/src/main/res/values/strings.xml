@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Bulsa</string>
+    <string name="title_activity_main">Bulsa</string>
+    <string name="package_name">website.forclients.bulsa</string>
+    <string name="custom_url_scheme">website.forclients.bulsa</string>
+</resources>
